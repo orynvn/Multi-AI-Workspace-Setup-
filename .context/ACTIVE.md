@@ -40,9 +40,9 @@ _(Anything blocking progress — link to ADR or ERRORS entry if applicable)_
 
 ## Recent Context (last 3 changes)
 
-_(Paste the last 3 lines from HISTORY.md here — updated by session-stop hook)_
-- _(none yet)_
-
+- [2026-05-05] refactor: simplify Copilot session-stop.sh — remove fragile awk ACTIVE.md rewrite (43→28 lines) — .github/hooks/scripts/session-stop.sh
+- [2026-05-05] perf: HISTORY.md selective-read — tail/grep patterns in AGENTS.md, copilot-instructions.md, oryn-dev.agent.md, planner.agent.md
+- [2026-05-05] feat: language setting — visible in all 3 thin adapters (CLAUDE.md, AGENTS.md, copilot-instructions.md); authoritative source in PROJECT.md §Language & Communication
 ---
 
 ## On Hold / Deferred

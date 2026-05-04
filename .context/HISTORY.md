@@ -36,3 +36,9 @@
 [2026-05-01] chore: edited `/Volumes/DataStorage/oryn-project/copilot-workspace-setup/.context/HISTORY.md`
 [2026-05-01] chore: edited `/Volumes/DataStorage/oryn-project/copilot-workspace-setup/.context/README.md`
 [2026-05-01] chore: edited `/Volumes/DataStorage/oryn-project/copilot-workspace-setup/.github/copilot-instructions.md`
+[2026-05-04] feat: init multi-AI-workspace-setup — unified context system (Copilot+Claude+Codex): PROJECT.md single source of truth, ACTIVE.md sprint state, CLAUDE.md/AGENTS.md/copilot-instructions.md thin adapters, 6 stack templates — full repo
+[2026-05-05] feat: Claude agent memory — memory:project for analyst+debugger, memory:user for reviewer; memory guidance sections explaining memory vs .context/ separation — .claude/agents/
+[2026-05-05] perf: Stop hook → type:prompt (LLM-based, context-aware) replacing bash script — .claude/settings.json
+[2026-05-05] refactor: simplify Copilot session-stop.sh — remove fragile awk ACTIVE.md rewrite (43→28 lines) — .github/hooks/scripts/session-stop.sh
+[2026-05-05] perf: HISTORY.md selective-read — tail/grep patterns in AGENTS.md, copilot-instructions.md, oryn-dev.agent.md, planner.agent.md
+[2026-05-05] feat: language setting — visible in all 3 thin adapters (CLAUDE.md, AGENTS.md, copilot-instructions.md); authoritative source in PROJECT.md §Language & Communication

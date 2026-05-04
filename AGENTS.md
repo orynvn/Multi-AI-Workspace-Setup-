@@ -3,6 +3,8 @@
 > Thin adapter — read by OpenAI Codex CLI at task start.
 > Project context lives in `.context/PROJECT.md`. Do not duplicate it here.
 
+**Language:** Respond in the same language the user writes in. Default: **Vietnamese**. Code, commits, variable names always **English**. Override in `.context/PROJECT.md` §Language & Communication.
+
 ---
 
 ## Context Loading
@@ -17,6 +19,12 @@ For specific tasks, also read on-demand:
 - `.context/ERRORS.md` — if the task involves fixing bugs or known issues
 - `.context/FILE-INDEX.md` — to locate existing module files without scanning
 - `.context/plans/<name>.md` — if a specific plan is referenced
+
+For history depth beyond ACTIVE.md Recent Context:
+- **Last 20 entries:** `tail -20 .context/HISTORY.md`
+- **Keyword search:** `grep -i "<feature>" .context/HISTORY.md .context/history/*.md 2>/dev/null`
+
+Never read `.context/HISTORY.md` in full — it rotates to `history/YYYY.md` and can be arbitrarily large.
 
 ---
 
@@ -42,7 +50,6 @@ For specific tasks, also read on-demand:
 
 ## Behavior Rules
 
-- Respond in the same language the user writes in (default: Vietnamese; code always English)
 - Implement only what is explicitly requested — no extra features (YAGNI)
 - Max function length: ~40 lines — split if longer
 - No hardcoded secrets — environment variables only

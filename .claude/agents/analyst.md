@@ -1,6 +1,7 @@
 ---
 description: Analyzes user requirements (Vietnamese/English), detects intent, creates structured plans in .context/plans/, and handles task status commands (list, run, done).
 model: claude-sonnet-4-6
+memory: project
 tools:
   - Read
   - Write
@@ -89,7 +90,13 @@ Say "run task M PLAN-NNN" to continue.
 Always read:
 - `.context/PROJECT.md` — stack, conventions, module map
 - `.context/DECISIONS.md` — existing architecture decisions
-- `.context/HISTORY.md` — recent changes (last 10 entries)
+- `.context/ACTIVE.md` Recent Context — covers last 3 changes at zero cost (already loaded)
+
+When you need more history depth:
+- **Recent 20:** `Bash("tail -20 .context/HISTORY.md")`
+- **Keyword search:** `Bash("grep -i '<feature>' .context/HISTORY.md .context/history/*.md 2>/dev/null")`
+
+Never read `.context/HISTORY.md` in full — it can be arbitrarily large.
 
 For `fix` type: also read `.context/ERRORS.md`.
 
@@ -253,3 +260,20 @@ Say "list tasks PLAN-NNN" anytime to see what's left.
 - One plan per requirement. Do not merge unrelated requirements.
 - Commands must be precise enough that no clarification is needed when running.
 - Checkbox legend: `- [ ]` pending · `- [~]` in-progress · `- [x]` done
+
+## Memory guidance (`memory: project`)
+
+Claude Code manages your memory at `.claude/agent-memory/analyst/MEMORY.md`.
+Update it when you learn something reusable for this project's future plans.
+
+**Record in agent memory** (project-specific, AI-optimized):
+- Recurring requirement patterns for this project (e.g. "auth tasks always need rate-limiting consideration")
+- Plan structures that worked well or failed
+- Naming patterns for plans, branches, modules used in this project
+- Stack-specific edge cases discovered during planning
+
+**Record in `.context/DECISIONS.md`** (shared with all AIs, human-readable):
+- Architectural decisions that constrain future implementation
+- Technology choices already made
+
+Do NOT duplicate between memory and `.context/`. Memory = your learned behaviors. `.context/` = shared ground truth.

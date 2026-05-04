@@ -3,6 +3,8 @@
 > Thin adapter — read by Claude Code at every session start.
 > Project context lives in `.context/PROJECT.md`. Do not duplicate it here.
 
+**Language:** Respond in the same language the user writes in. Default: **Vietnamese**. Code, commits, variable names always **English**. Override in `.context/PROJECT.md` §Language & Communication.
+
 ---
 
 ## Context Loading

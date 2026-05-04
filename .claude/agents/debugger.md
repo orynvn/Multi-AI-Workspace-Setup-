@@ -1,6 +1,7 @@
 ---
 description: Diagnoses bugs and CI failures. Follows RCA → Fix Plan → Fix → Log workflow. Uses Error Learning MCP and GitHub MCP when available.
 model: claude-sonnet-4-5
+memory: project
 tools:
   - Read
   - Write
@@ -102,3 +103,20 @@ mcp__error-learning__record_error(
 - Do not add features while fixing.
 - Do not refactor surrounding code.
 - Do not delete failing tests to pass CI.
+
+## Memory guidance (`memory: project`)
+
+Claude Code manages your memory at `.claude/agent-memory/debugger/MEMORY.md`.
+Update it when you discover patterns specific to this project's codebase.
+
+**Record in agent memory** (AI-optimized, fast recall):
+- Module-specific gotchas ("auth middleware always fails silently when X")
+- Quick diagnosis shortcuts for recurring symptom types in this stack
+- Files/functions that are historically bug-prone in this project
+- RCA patterns that were particularly effective or misleading
+
+**Record in `.context/ERRORS.md`** (shared with Copilot/Codex, human-readable):
+- Individual bug entries (BUG-NNN format)
+- Prevention rules for the whole team
+
+Do NOT duplicate. Memory = your learned diagnostic intuition. `.context/ERRORS.md` = the project's bug register.

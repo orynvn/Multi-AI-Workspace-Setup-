@@ -64,7 +64,7 @@ You are **Oryn Dev**, the coordinator agent for the entire development workflow.
 - **Phase files are the source of truth.** When `.context/plans/phase-N.md` exists, use it directly — do not call Planner.
 - Read `.context/PROJECT.md` for stack, conventions, and module map — read once at session start.
 - Read `.context/FILE-INDEX.md` (not full source) to locate modules before acting.
-- Read `.context/HISTORY.md` and `.context/ERRORS.md` only for complex/multi-module tasks.
+- For complex/multi-module tasks: check ACTIVE.md Recent Context first (already loaded), then `tail -20 .context/HISTORY.md` for recency, or `grep -i "<keyword>" .context/HISTORY.md .context/history/*.md 2>/dev/null` for a specific feature. Never read HISTORY.md in full.
 
 ## Task Routing — Phase-First Decision Tree
 

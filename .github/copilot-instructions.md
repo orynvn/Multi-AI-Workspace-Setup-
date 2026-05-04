@@ -3,6 +3,8 @@
 > Thin adapter — project context lives in `.context/PROJECT.md`.
 > Read it at the start of every complex task.
 
+**Language:** Respond in the same language the user writes in. Default: **Vietnamese**. Code, commits, variable names always **English**. Override in `.context/PROJECT.md` §Language & Communication.
+
 ---
 
 ## 1. Context Loading
@@ -15,8 +17,12 @@
 
 **Simple tasks** (single-file edit, docs, config, quick fix): skip context reads.
 
-> Session context (HISTORY tail-15 + FILE-INDEX + ACTIVE.md) is injected automatically
-> via `.github/hooks/scripts/inject-session-ctx.sh` at session start.
+> ACTIVE.md (including Recent Context) is injected automatically at session start
+> via `.github/hooks/scripts/inject-session-ctx.sh`.
+>
+> For deeper history: `tail -20 .context/HISTORY.md` (recent 20 entries) or
+> `grep -i "<keyword>" .context/HISTORY.md .context/history/*.md 2>/dev/null` (keyword search).
+> Never read HISTORY.md in full.
 
 ---
 
