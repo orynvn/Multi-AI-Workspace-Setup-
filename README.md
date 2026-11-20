@@ -236,6 +236,8 @@ Lần đầu dùng Codex trong project:
 
 Config: Claude → `.mcp.json`, Codex → `.codex/config.toml`, Copilot → `.vscode/mcp.json`.
 
+Cài `error-learning` (tuỳ chọn, repo riêng clone vào `mcp-error-learning/`): `cd mcp-error-learning && python3 -m pip install -e .`
+
 Setup `GITHUB_TOKEN`:
 ```bash
 export GITHUB_TOKEN=ghp_your_token

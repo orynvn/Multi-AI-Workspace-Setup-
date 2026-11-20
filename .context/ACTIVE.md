@@ -40,9 +40,9 @@ _(Anything blocking progress — link to ADR or ERRORS entry if applicable)_
 
 ## Recent Context (last 3 changes)
 
-- [2026-05-05] feat: CLI multi-agent team — team-lead (orchestrator), dev-1 (backend), dev-2 (frontend), dev-3 (db/infra), tester — .claude/agents/
 - [2026-11-21] chore: remove 5 one-off cp allow rules with glob wildcards (permission warnings) — .claude/settings.local.json
 - [2026-11-21] chore: update Claude Code + Codex setup to current docs — fix hooks (stdin JSON, exit 2), .mcp.json, skills, agent name/model aliases, add .codex/ (config, hooks, rules, agents), CLAUDE.md @imports — .claude/, .codex/, .mcp.json, CLAUDE.md, AGENTS.md, README.md
+- [2026-11-21] chore: update Copilot VS Code config — drop redundant/deprecated settings, fix stale serverSampling key, hide duplicate .claude/agents, remove non-schema mcp.json fields — .vscode/settings.json, .vscode/mcp.json, README.md
 ---
 
 ## On Hold / Deferred

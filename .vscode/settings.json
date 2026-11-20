@@ -1,49 +1,31 @@
 {
-  // ─── Agent & Chat ───────────────────────────────────────────────────────────
-  "chat.agent.enabled": true,
+  // ─── Copilot customization ──────────────────────────────────────────────────
+  // Defaults already discover: .github/agents, .github/instructions, .github/prompts,
+  // .github/hooks, .github/skills, .claude/skills, .agents/skills — no need to list them.
 
-  // Custom agents: .github/agents/ directory
+  // Copilot also discovers .claude/agents by default. Claude Code agents share names
+  // with the Copilot agents in .github/agents (planner, implementer, debugger, quick...),
+  // so hide them to avoid duplicates in the agent picker.
   "chat.agentFilesLocations": {
-    ".github/agents": true
+    ".claude/agents": false
   },
 
-  // Prompt files: .github/prompts/ directory
-  "chat.promptFilesLocations": {
-    ".github/prompts": true
-  },
+  // CLAUDE.md is the Claude Code adapter. Copilot uses .github/copilot-instructions.md;
+  // don't stack both into the same Copilot session (Local harness).
+  "chat.useClaudeMdFile": false,
 
-  // Instructions files: .github/instructions/ directory
-  "chat.instructionsFilesLocations": {
-    ".github/instructions": true
-  },
-
-  // Hooks: VS Code auto-loads from .github/hooks/ by default
-  // (default already includes .github/hooks — only override to add extra paths)
-  "chat.hookFilesLocations": {
-    ".github/hooks": true
-  },
-
-  // Allow subagents to call subagents (nested, max depth 5)
+  // Allow subagents to call subagents (Local harness only, max depth 5)
   "chat.subagents.allowInvocationsFromSubagents": true,
 
-  // Auto-fix compiler / lint errors after the agent edits a file
-  "github.copilot.chat.agent.autoFix": true,
-
   // ─── MCP Servers ────────────────────────────────────────────────────────────
-  // Config in .vscode/mcp.json (auto-discovered by VS Code)
+  // Config in .vscode/mcp.json (auto-discovered by VS Code).
+  // To let an MCP server use sampling, run "MCP: List Servers > Configure Model Access"
+  // and let VS Code write the chat.mcp.serverSampling entry (don't hand-write the key).
 
   // ─── Editor ─────────────────────────────────────────────────────────────────
   "editor.formatOnSave": true,
   "files.trimTrailingWhitespace": true,
-  "files.insertFinalNewline": true,
-  "chat.mcp.serverSampling": {
-    "copilot-workspace-setup/.vscode/mcp.json: error-learning": {
-      "allowedModels": [
-        "copilot/auto",
-        "copilotcli/claude-sonnet-4.6"
-      ]
-    }
-  },
+  "files.insertFinalNewline": true
 
   // ─── Recommended extensions ──────────────────────────────────────────────────
   // See .vscode/extensions.json
