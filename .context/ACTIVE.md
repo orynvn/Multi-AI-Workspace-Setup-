@@ -40,9 +40,9 @@ _(Anything blocking progress — link to ADR or ERRORS entry if applicable)_
 
 ## Recent Context (last 3 changes)
 
-- [2026-11-21] chore: update Copilot VS Code config — drop redundant/deprecated settings, fix stale serverSampling key, hide duplicate .claude/agents, remove non-schema mcp.json fields — .vscode/settings.json, .vscode/mcp.json, README.md
 - [2026-11-21] refactor: convert Copilot prompts to Agent Skills — 10 prompts → .github/skills/<name>/SKILL.md, merge 4 overlapping guide skills into references/guide.md, add frontmatter to file-indexer — .github/skills/, .github/prompts/ (removed)
 - [2026-11-21] fix: make Claude skills (/plan /do /todo /ship) harness-agnostic — fall back to .claude/agents/analyst.md or Copilot agents when Claude agents are unavailable — .claude/skills/
+- [2026-11-21] docs: rewrite README in English and correct outdated details (clone URL, setup steps, shared assets, skills, Codex setup) — README.md
 ---
 
 ## On Hold / Deferred
