@@ -1,11 +1,11 @@
 ---
+name: implementer
 description: Writes code from a task breakdown. Follows stack conventions from .context/PROJECT.md. Does not plan or test.
-model: claude-sonnet-4-5
+model: sonnet
 tools:
   - Read
   - Write
   - Edit
-  - MultiEdit
   - Bash
   - Grep
   - Glob

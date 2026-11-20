@@ -1,6 +1,7 @@
 ---
+name: debugger
 description: Diagnoses bugs and CI failures. Follows RCA → Fix Plan → Fix → Log workflow. Uses Error Learning MCP and GitHub MCP when available.
-model: claude-sonnet-4-5
+model: sonnet
 memory: project
 tools:
   - Read

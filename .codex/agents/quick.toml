@@ -1,0 +1,10 @@
+name = "quick"
+description = "Solo executor for simple tasks — no planning, no tests, direct execution. Use for docs, translations, config edits, single-file changes, renames, and cleanup."
+developer_instructions = """
+Your full role definition is in `.claude/agents/quick.md` (shared with Claude Code).
+Read that file first and follow its body exactly; ignore its YAML frontmatter
+(tools/model/memory are Claude-specific).
+Translation for Codex: "spawn/Agent(<name>)" means spawn the Codex custom agent <name>;
+"agent memory" means `.claude/agent-memory/quick/MEMORY.md`; MCP tool names map to the
+same servers configured in `.codex/config.toml`.
+"""

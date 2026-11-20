@@ -1,11 +1,11 @@
 ---
+name: dev-1
 description: Backend developer — implements server-side logic (API routes, services, controllers, business logic). Spawned by team-lead for CLI parallel execution. Does not plan or test.
-model: claude-sonnet-4-5
+model: sonnet
 tools:
   - Read
   - Write
   - Edit
-  - MultiEdit
   - Bash
   - Grep
   - Glob

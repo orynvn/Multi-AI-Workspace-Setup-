@@ -1,6 +1,7 @@
 # AGENTS.md
 
-> Thin adapter — read by OpenAI Codex CLI at task start.
+> Thin adapter — read by OpenAI Codex (CLI / IDE / cloud) at task start.
+> Codex has no file imports: the files below must be read explicitly. Keep the combined AGENTS.md chain under 32 KiB (`project_doc_max_bytes`).
 > Project context lives in `.context/PROJECT.md`. Do not duplicate it here.
 
 **Language:** Respond in the same language the user writes in. Default: **Vietnamese**. Code, commits, variable names always **English**. Override in `.context/PROJECT.md` §Language & Communication.
@@ -48,6 +49,23 @@ Never read `.context/HISTORY.md` in full — it rotates to `history/YYYY.md` and
 
 ---
 
+## Custom Agents (subagents)
+
+Project agents live in `.codex/agents/*.toml`; each one points to its shared role file in `.claude/agents/<name>.md` (single source for Claude + Codex). Spawn them when the task matches:
+
+| Task | Agent |
+|------|-------|
+| Plan a feature / task commands (list, run, done task N) | `analyst` (or `planner` for read-only breakdown) |
+| Implement a planned task | `implementer` |
+| Large multi-domain feature in parallel | `team-lead` → `dev-1` (backend), `dev-2` (frontend), `dev-3` (db/infra), `tester` |
+| Bug / CI failure | `debugger` |
+| Code review / security audit | `reviewer` / `security` (read-only) |
+| Docs, rename, config, single-file edit | `quick` |
+
+Project config: `.codex/config.toml` (sandbox, MCP), `.codex/hooks.json` (destructive-command guard + HISTORY reminder — approve once via `/hooks`), `.codex/rules/default.rules` (exec policy). All require the project to be **trusted**.
+
+---
+
 ## Behavior Rules
 
 - Implement only what is explicitly requested — no extra features (YAGNI)
@@ -61,7 +79,7 @@ Never read `.context/HISTORY.md` in full — it rotates to `history/YYYY.md` and
 
 ## After Every Task
 
-- Append to `.context/HISTORY.md`: `[YYYY-MM-DD] <type>: <desc> — <file>`
+- Log: `bash .context/log.sh "<type>: <desc> — <files>"` (appends `[YYYY-MM-DD]` entry to HISTORY.md + syncs ACTIVE.md Recent Context)
 - Update `.context/ACTIVE.md` In Progress table (mark done or advance phase)
 - Update `.context/FILE-INDEX.md` if files were created, renamed, or deleted
 - Commit format: `type(scope): subject`

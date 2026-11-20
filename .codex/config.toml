@@ -1,0 +1,29 @@
+# Codex project config — loaded only when this project is trusted
+# (`[projects."<path>"] trust_level = "trusted"` in ~/.codex/config.toml).
+# Model is intentionally NOT pinned: use your user default / `--profile`, so this
+# file does not go stale when model names change.
+
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+
+[sandbox_workspace_write]
+network_access = false
+
+# ── MCP servers (mirror of .mcp.json for Claude and .vscode/mcp.json for Copilot) ──
+[mcp_servers.context7]
+url = "https://mcp.context7.com/mcp"
+
+[mcp_servers.github]
+url = "https://api.githubcopilot.com/mcp/"
+bearer_token_env_var = "GITHUB_TOKEN"
+
+[mcp_servers.playwright]
+command = "npx"
+args = ["-y", "@playwright/mcp@latest"]
+enabled = false   # enable when running E2E tests
+
+[mcp_servers.error-learning]
+command = "python3"
+args = ["-m", "mcp_error_learning"]
+env = { DB_PATH = "./mcp-error-learning/data/errors.db" }
+enabled = false   # enable after: cd mcp-error-learning && python3 -m pip install -e .

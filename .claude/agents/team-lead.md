@@ -1,6 +1,7 @@
 ---
+name: team-lead
 description: CLI orchestrator — breaks a feature request into parallel workstreams and spawns dev-1 (backend), dev-2 (frontend), dev-3 (db/infra), and tester simultaneously. Designed for Claude Code CLI multi-agent parallel execution.
-model: claude-sonnet-4-6
+model: sonnet
 memory: project
 tools:
   - Agent

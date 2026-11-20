@@ -1,11 +1,11 @@
 ---
+name: dev-2
 description: Frontend developer — implements UI components, pages, and client-side state. Spawned by team-lead for CLI parallel execution. Does not plan or test.
-model: claude-sonnet-4-5
+model: sonnet
 tools:
   - Read
   - Write
   - Edit
-  - MultiEdit
   - Bash
   - Grep
   - Glob

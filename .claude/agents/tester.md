@@ -1,6 +1,7 @@
 ---
+name: tester
 description: Test developer — writes unit and integration tests for code produced by dev-1, dev-2, dev-3, then runs the test suite and reports results. Always spawned last by team-lead.
-model: claude-sonnet-4-5
+model: sonnet
 tools:
   - Read
   - Write

@@ -1,0 +1,36 @@
+# Codex exec policy (experimental) — applies to commands run outside the sandbox.
+# Exact-prefix match only; .claude/hooks/pre-bash.sh (PreToolUse hook) catches other orderings.
+# Test: codex execpolicy check --pretty --rules .codex/rules/default.rules -- git push --force
+
+prefix_rule(
+    pattern = ["rm", ["-rf", "-fr", "-r", "--recursive"]],
+    decision = "forbidden",
+    justification = "Recursive delete — ask the user to run it manually.",
+    match = ["rm -rf build"],
+)
+
+prefix_rule(
+    pattern = ["git", "push", ["--force", "-f", "--force-with-lease"]],
+    decision = "forbidden",
+    justification = "Force push — ask the user to run it manually.",
+    match = ["git push --force origin main"],
+    not_match = ["git push origin main"],
+)
+
+prefix_rule(
+    pattern = ["git", "reset", "--hard"],
+    decision = "prompt",
+    justification = "Discards uncommitted work.",
+)
+
+prefix_rule(
+    pattern = ["git", "clean", ["-f", "-fd", "-fdx", "-df"]],
+    decision = "prompt",
+    justification = "Deletes untracked files.",
+)
+
+prefix_rule(
+    pattern = ["git", "push"],
+    decision = "prompt",
+    justification = "Publishing commits requires confirmation.",
+)

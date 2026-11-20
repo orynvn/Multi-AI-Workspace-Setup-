@@ -1,6 +1,7 @@
 ---
+name: quick
 description: Solo executor for simple tasks — no planning, no tests, direct execution. Use for docs, translations, config edits, single-file changes, renames, and cleanup.
-model: claude-haiku-4-5
+model: haiku
 tools:
   - Read
   - Write

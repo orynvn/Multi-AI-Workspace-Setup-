@@ -1,6 +1,7 @@
 ---
+name: planner
 description: Analyzes requirements and outputs a task breakdown. Read-only — does not write code.
-model: claude-sonnet-4-5
+model: sonnet
 tools:
   - Read
   - Grep

@@ -16,7 +16,15 @@
 
 ## Resolved
 
-*(No resolved errors yet)*
+### BUG-001: Claude Code hooks silently did nothing (destructive-command guard never blocked)
+**Date:** 2026-11-21
+**Stack:** Claude Code config
+**Module:** WORKSPACE
+**Symptom:** `pre-bash.sh` never blocked `rm -rf` / force push; `post-edit.sh` never formatted files.
+**Root cause:** Hooks read a non-existent `$CLAUDE_TOOL_INPUT` env var (input arrives as JSON on stdin) and blocked with `exit 1` (non-blocking; only `exit 2` blocks).
+**Fix:** `.claude/hooks/*.sh` — parse `tool_input` from stdin, `exit 2` + stderr to block; Stop hook emits `{"decision":"block"}` and honours `stop_hook_active`.
+**Prevention:** Test hooks by piping sample JSON into the script; re-check hook docs when upgrading Claude Code / Codex.
+**Test added:** manual — scratchpad hook test (17 cases)
 
 ---
 

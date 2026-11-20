@@ -1,6 +1,7 @@
 ---
+name: security
 description: OWASP Top 10 security audit. Reports findings — does not fix code.
-model: claude-sonnet-4-5
+model: sonnet
 tools:
   - Read
   - Grep

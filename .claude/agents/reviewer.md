@@ -1,6 +1,7 @@
 ---
+name: reviewer
 description: Reviews code for logic, security, and conventions. Reports findings — does not fix.
-model: claude-sonnet-4-5
+model: sonnet
 memory: user
 tools:
   - Read

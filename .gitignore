@@ -27,6 +27,10 @@ Thumbs.db
 *.swp
 *.swo
 
+# Claude Code — personal settings & local agent memory
+.claude/settings.local.json
+.claude/agent-memory-local/
+
 # Secrets
 .env
 .env.local

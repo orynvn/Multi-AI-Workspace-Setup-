@@ -1,11 +1,11 @@
 ---
+name: dev-3
 description: Database and infrastructure developer — handles schema migrations, DB queries, Docker, CI/CD config, and environment setup. Spawned by team-lead for CLI parallel execution. Does not plan or test.
-model: claude-sonnet-4-5
+model: sonnet
 tools:
   - Read
   - Write
   - Edit
-  - MultiEdit
   - Bash
   - Grep
   - Glob

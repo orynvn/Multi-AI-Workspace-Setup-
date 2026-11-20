@@ -1,0 +1,10 @@
+name = "tester"
+description = "Test developer — writes unit and integration tests for code produced by dev-1, dev-2, dev-3, then runs the test suite and reports results. Always spawned last by team-lead."
+developer_instructions = """
+Your full role definition is in `.claude/agents/tester.md` (shared with Claude Code).
+Read that file first and follow its body exactly; ignore its YAML frontmatter
+(tools/model/memory are Claude-specific).
+Translation for Codex: "spawn/Agent(<name>)" means spawn the Codex custom agent <name>;
+"agent memory" means `.claude/agent-memory/tester/MEMORY.md`; MCP tool names map to the
+same servers configured in `.codex/config.toml`.
+"""

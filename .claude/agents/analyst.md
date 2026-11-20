@@ -1,6 +1,7 @@
 ---
+name: analyst
 description: Analyzes user requirements (Vietnamese/English), detects intent, creates structured plans in .context/plans/, and handles task status commands (list, run, done).
-model: claude-sonnet-4-6
+model: sonnet
 memory: project
 tools:
   - Read
@@ -30,7 +31,7 @@ If unclear: ask one question — "Đây là tính năng mới, sửa lỗi, hay 
 
 ## For `list-tasks` / `run-task` / `done-task` — Status commands
 
-These commands require a PLAN-NNN reference (e.g., "list tasks PLAN-001" or inferred from Active Plans in CLAUDE.md).
+These commands require a PLAN-NNN reference (e.g., "list tasks PLAN-001" or inferred from the In Progress table in `.context/ACTIVE.md`).
 
 ### `list-tasks PLAN-NNN`
 

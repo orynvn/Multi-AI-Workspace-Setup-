@@ -1,0 +1,10 @@
+name = "team-lead"
+description = "CLI orchestrator — breaks a feature request into parallel workstreams and spawns dev-1 (backend), dev-2 (frontend), dev-3 (db/infra), and tester simultaneously. Designed for Claude Code CLI multi-agent parallel execution."
+developer_instructions = """
+Your full role definition is in `.claude/agents/team-lead.md` (shared with Claude Code).
+Read that file first and follow its body exactly; ignore its YAML frontmatter
+(tools/model/memory are Claude-specific).
+Translation for Codex: "spawn/Agent(<name>)" means spawn the Codex custom agent <name>;
+"agent memory" means `.claude/agent-memory/team-lead/MEMORY.md`; MCP tool names map to the
+same servers configured in `.codex/config.toml`.
+"""

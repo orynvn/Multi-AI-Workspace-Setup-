@@ -32,6 +32,8 @@ git clone https://github.com/orynvn/multi-AI-workspace-setup.git
 cp -r multi-AI-workspace-setup/.context your-project/
 cp -r multi-AI-workspace-setup/.github your-project/
 cp -r multi-AI-workspace-setup/.claude your-project/
+cp -r multi-AI-workspace-setup/.codex your-project/
+cp multi-AI-workspace-setup/.mcp.json your-project/
 cp -r multi-AI-workspace-setup/.vscode your-project/
 cp multi-AI-workspace-setup/CLAUDE.md your-project/
 cp multi-AI-workspace-setup/AGENTS.md your-project/
@@ -95,7 +97,8 @@ Thêm module mới → sửa .context/PROJECT.md (Module Map)
 ```
 project-root/
 ├── CLAUDE.md                          # Thin adapter cho Claude Code
-├── AGENTS.md                          # Thin adapter cho OpenAI Codex CLI
+├── AGENTS.md                          # Thin adapter cho OpenAI Codex
+├── .mcp.json                          # MCP servers cho Claude Code
 │
 ├── .context/                          # SHARED brain — đọc bởi tất cả AI
 │   ├── PROJECT.md                     # ★ Single source of truth
@@ -118,10 +121,16 @@ project-root/
 │   └── skills/                        # Reusable Copilot skills
 │
 ├── .claude/
-│   ├── settings.json                  # MCP servers + hooks
-│   ├── agents/                        # 7 Claude agents
-│   ├── commands/                      # Custom /commands
-│   └── hooks/                         # pre-bash, post-edit, session-stop
+│   ├── settings.json                  # Hooks + permissions (deny .env)
+│   ├── agents/                        # 12 Claude agents (role files dùng chung với Codex)
+│   ├── skills/                        # /plan, /do, /todo, /ship
+│   └── hooks/                         # pre-bash, post-edit, session-stop (dùng chung với Codex)
+│
+├── .codex/
+│   ├── config.toml                    # Sandbox, approval, MCP servers
+│   ├── hooks.json                     # PreToolUse guard + Stop reminder
+│   ├── rules/default.rules            # Exec policy (xoá đệ quy, force push...)
+│   └── agents/*.toml                  # 12 custom agents → trỏ về .claude/agents/*.md
 │
 ├── .vscode/
 │   ├── settings.json                  # VS Code + Copilot settings
@@ -151,9 +160,8 @@ project-root/
 [2026-05-05] feat: JWT refresh — src/auth/service.ts
 ```
 
-Sau đó update `.context/ACTIVE.md`:
-- Đánh dấu task done trong bảng In Progress
-- Cập nhật Recent Context (last 3 entries)
+`log.sh` tự sync Recent Context trong `.context/ACTIVE.md`; sau đó chỉ cần đánh dấu task done trong bảng In Progress.
+Stop hook (Claude + Codex) sẽ nhắc nếu có file thay đổi mà HISTORY.md chưa có entry hôm nay.
 
 ### Đầu sprint mới
 
@@ -187,6 +195,17 @@ Sau đó update `.context/ACTIVE.md`:
 | `@security` | Security audit | "audit bảo mật" |
 | `@debugger` | Fix bug | "lỗi X không chạy" |
 | `@planner` | Phân tích yêu cầu | "phân tích requirement" |
+| `@team-lead` | Feature lớn, chạy song song dev-1/dev-2/dev-3/tester | `claude --agent team-lead` |
+
+Skills: `/plan <yêu cầu>`, `/do <N> PLAN-NNN`, `/todo PLAN-NNN`, `/ship`.
+
+### Codex custom agents (`.codex/agents/`)
+
+Cùng tên với Claude agents. Mỗi file TOML chỉ trỏ tới `.claude/agents/<name>.md` → sửa role một chỗ, cả Claude và Codex dùng chung.
+
+Lần đầu dùng Codex trong project:
+1. Trust project (Codex hỏi khi mở lần đầu, hoặc `[projects."<path>"] trust_level = "trusted"` trong `~/.codex/config.toml`) — nếu không, toàn bộ `.codex/` bị bỏ qua.
+2. Chạy `/hooks` trong Codex để review & approve hooks.
 
 ### Copilot agents (`.github/agents/`)
 
@@ -211,9 +230,11 @@ Sau đó update `.context/ACTIVE.md`:
 | Server | Provider | Dùng cho |
 |--------|----------|---------|
 | `error-learning` | Local SQLite | Ghi nhớ bugs đã fix, tránh lặp lại |
-| `github` | @modelcontextprotocol/server-github | Issues, PRs, CI logs |
+| `github` | GitHub MCP (remote, `api.githubcopilot.com/mcp`) | Issues, PRs, CI logs |
 | `playwright` | @playwright/mcp | E2E testing browser automation |
 | `context7` | context7.com | Library docs (React, Next.js, Laravel...) |
+
+Config: Claude → `.mcp.json`, Codex → `.codex/config.toml`, Copilot → `.vscode/mcp.json`.
 
 Setup `GITHUB_TOKEN`:
 ```bash
@@ -248,5 +269,5 @@ Khi có thêm AI mới (ví dụ Cursor, Windsurf):
 
 - **GitHub Copilot**: VS Code v1.100+, GitHub Copilot extension
 - **Claude**: Claude Code CLI
-- **Codex**: OpenAI Codex CLI
+- **Codex**: OpenAI Codex CLI (project `.codex/`, hooks, custom agents)
 - **MCP**: Node.js 18+, Python 3.11+ (cho error-learning)

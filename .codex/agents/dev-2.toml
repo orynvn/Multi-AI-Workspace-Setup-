@@ -1,0 +1,10 @@
+name = "dev-2"
+description = "Frontend developer — implements UI components, pages, and client-side state. Spawned by team-lead for CLI parallel execution. Does not plan or test."
+developer_instructions = """
+Your full role definition is in `.claude/agents/dev-2.md` (shared with Claude Code).
+Read that file first and follow its body exactly; ignore its YAML frontmatter
+(tools/model/memory are Claude-specific).
+Translation for Codex: "spawn/Agent(<name>)" means spawn the Codex custom agent <name>;
+"agent memory" means `.claude/agent-memory/dev-2/MEMORY.md`; MCP tool names map to the
+same servers configured in `.codex/config.toml`.
+"""

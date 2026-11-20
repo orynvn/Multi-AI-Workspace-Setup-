@@ -7,7 +7,7 @@
 
 | ADR | Title | Date | Status |
 |-----|-------|------|--------|
-| — | *(No decisions yet — add when one is made)* | — | — |
+| ADR-001 | Claude + Codex share agent role files and hook scripts (`.claude/agents/*.md`, `.claude/hooks/*.sh`); `.codex/agents/*.toml` are thin pointers; models referenced by alias / not pinned | 2026-11-21 | Accepted |
 
 ## Statuses
 

@@ -1,0 +1,28 @@
+{
+  "mcpServers": {
+    "context7": {
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp"
+    },
+    "github": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "headers": {
+        "Authorization": "Bearer ${GITHUB_TOKEN}"
+      }
+    },
+    "playwright": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"]
+    },
+    "error-learning": {
+      "type": "stdio",
+      "command": "python3",
+      "args": ["-m", "mcp_error_learning"],
+      "env": {
+        "DB_PATH": "./mcp-error-learning/data/errors.db"
+      }
+    }
+  }
+}
