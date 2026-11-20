@@ -1,24 +1,19 @@
 ---
-mode: agent
-tools:
-  - codebase
-  - readFile
-  - runCommands
-  - search
-description: >
-  Analyze and find performance bottlenecks: DB queries (N+1), API latency, bundle size, Memory leaks.
-  Output report with areas for improvement, prioritized by impact.
+name: profile-performance
+description: "Analyze and find performance bottlenecks: DB queries (N+1), API latency, bundle size, Memory leaks. Output report with areas for improvement, prioritized by impact."
 ---
 
 # Profile Performance
+
+> **Inputs** (`target`, `stack`, `concern`): take them from the user's message / skill arguments. Ask once for any required value that is missing; use `YYYY-MM-DD` = today.
 
 Analyze the performance of the specified code/feature. Find bottlenecks and suggest measurable improvements.
 
 ## Scope of analysis
 
-**Target:** ${input:target:File, module, or endpoint to analyze (e.g. UserController, /api/products)}
-**Stack:** ${input:stack:Laravel | Next.js | React | NestJS | Django | FastAPI}
-**Suspected issue type:** ${input:concern:N+1 queries | Slow API | Large bundle | Memory leak | Slow render | All}
+**Target:** `<target>` _(File, module, or endpoint to analyze (e.g. UserController, /api/products))_
+**Stack:** `<stack>` _(Laravel | Next.js | React | NestJS | Django | FastAPI)_
+**Suspected issue type:** `<concern>` _(N+1 queries | Slow API | Large bundle | Memory leak | Slow render | All)_
 
 ---
 

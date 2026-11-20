@@ -1,22 +1,18 @@
 ---
-mode: agent
-tools:
-  - codebase
-  - runCommands
-  - readFile
-description: >
-  Run API/unit/integration tests, analyze results, and report in standard format.
-  Auto-detects stack to use the correct test runner.
+name: run-api-test
+description: "Run API/unit/integration tests, analyze results, and report in standard format. Auto-detects stack to use the correct test runner."
 ---
 
 # Run API Test Prompt
+
+> **Inputs** (`module`, `testType`): take them from the user's message / skill arguments. Ask once for any required value that is missing; use `YYYY-MM-DD` = today.
 
 Run API and integration tests for the specified module.
 
 ## Information
 
-**Module/Feature:** ${input:module:Module to test (e.g. UserController, AuthService, or leave blank to test all)}
-**Test type:** ${input:testType:unit | integration | all}
+**Module/Feature:** `<module>` _(Module to test (e.g. UserController, AuthService, or leave blank to test all))_
+**Test type:** `<testType>` _(unit | integration | all)_
 
 ---
 
@@ -27,7 +23,7 @@ Run API and integration tests for the specified module.
 **Laravel:**
 ```bash
 # Specific module
-php artisan test --filter=${input:module} --verbose
+php artisan test --filter=<module> --verbose
 
 # All tests
 php artisan test --verbose
@@ -39,7 +35,7 @@ php artisan test --coverage --min=80
 **Next.js / React / Vue (Vitest):**
 ```bash
 # Specific file
-npx vitest run src/__tests__/${input:module}.test.ts --reporter=verbose
+npx vitest run src/__tests__/<module>.test.ts --reporter=verbose
 
 # All tests
 npx vitest run --reporter=verbose
@@ -50,7 +46,7 @@ npx vitest run --coverage --reporter=verbose
 
 **NestJS (Jest):**
 ```bash
-npm run test -- --verbose --testPathPattern=${input:module}
+npm run test -- --verbose --testPathPattern=<module>
 npm run test:cov
 ```
 
@@ -69,9 +65,9 @@ Parse output to determine:
 
 **If all PASS:**
 ```markdown
-## ✅ API Test Report — ${input:module}
+## ✅ API Test Report — <module>
 
-**Timestamp:** {{date}} {{time}}
+**Timestamp:** YYYY-MM-DD HH:MM
 **Tests:** X pass | 0 fail | 0 skip
 **Coverage:** XX%
 
@@ -80,9 +76,9 @@ All tests passed. Ready to merge.
 
 **If there are FAILs:**
 ```markdown
-## ❌ API Test Report — ${input:module}
+## ❌ API Test Report — <module>
 
-**Timestamp:** {{date}} {{time}}
+**Timestamp:** YYYY-MM-DD HH:MM
 **Tests:** X pass | Y fail | Z skip
 
 ### Failing Tests
@@ -104,9 +100,13 @@ All tests passed. Ready to merge.
 
 If tests reveal a previously unknown bug:
 ```
-[{{date}}] BUG: <description> — <file>:<line> — Fixed: pending
+[YYYY-MM-DD] BUG: <description> — <file>:<line> — Fixed: pending
 ```
 
 ---
 
 **Start: Detect stack → run tests → report.**
+
+---
+
+Detailed conventions, formats and examples: [references/guide.md](references/guide.md) — read it before executing.

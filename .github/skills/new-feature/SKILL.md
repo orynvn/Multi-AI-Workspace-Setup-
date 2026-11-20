@@ -1,24 +1,19 @@
 ---
-mode: agent
-tools:
-  - codebase
-  - editFiles
-  - readFile
-  - runCommands
-description: >
-  Create a complete new feature following the Plan → Implement → Test → Commit → Log pipeline.
-  Use when implementing a feature from scratch, including test cases and a standardized commit.
+name: new-feature
+description: "Create a complete new feature following the Plan → Implement → Test → Commit → Log pipeline. Use when implementing a feature from scratch, including test cases and a standardized commit."
 ---
 
 # New Feature Prompt
+
+> **Inputs** (`featureName`, `description`, `module`): take them from the user's message / skill arguments. Ask once for any required value that is missing; use `YYYY-MM-DD` = today.
 
 I need to implement a new feature. Run the full pipeline:
 
 ## Feature information
 
-**Feature name:** ${input:featureName:Feature name (e.g. User Authentication)}
-**Description:** ${input:description:Short description of the functionality to implement}
-**Module:** ${input:module:Related module (e.g. AUTH, USER, PRODUCT)}
+**Feature name:** `<featureName>` _(Feature name (e.g. User Authentication))_
+**Description:** `<description>` _(Short description of the functionality to implement)_
+**Module:** `<module>` _(Related module (e.g. AUTH, USER, PRODUCT))_
 
 ---
 
@@ -48,7 +43,7 @@ After user confirmation:
 
 ### Step 3 — TEST
 
-1. Write test cases for the entire feature (use the `test-case-writer` skill).
+1. Write test cases for the entire feature (use the `/write-test-cases` skill).
 2. Run tests.
 3. Report results.
 4. If failing → fix → rerun.
@@ -57,7 +52,7 @@ After user confirmation:
 
 After all tests pass, commit:
 
-1. Run `/commit-task` prompt to create a Conventional Commits message.
+1. Use the `/commit-task` skill to create a Conventional Commits message.
 2. Verify no sensitive files are in staged changes.
 3. Commit with message: `feat(<scope>): <subject>`
 4. **Do not push** — user decides.
@@ -66,9 +61,9 @@ After all tests pass, commit:
 
 1. Append to `.context/HISTORY.md`:
    ```
-   [{{date}}] feat: ${input:featureName} — <files affected>
+   [YYYY-MM-DD] feat: <featureName> — <files affected>
    ```
-2. If an architectural decision was made → run the `log-decision` prompt.
+2. If an architectural decision was made → use the `/log-decision` skill.
 
 ---
 

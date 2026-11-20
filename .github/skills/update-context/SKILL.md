@@ -1,22 +1,18 @@
 ---
-mode: agent
-tools:
-  - editFiles
-  - readFile
-  - codebase
-description: >
-  Update all context files (.context/) to reflect the current state
-  of the project. Use at the end of a session or after completing a milestone.
+name: update-context
+description: "Update all context files (.context/) to reflect the current state of the project. Use at the end of a session or after completing a milestone."
 ---
 
 # Update Context Prompt
+
+> **Inputs** (`session`, `changes`): take them from the user's message / skill arguments. Ask once for any required value that is missing; use `YYYY-MM-DD` = today.
 
 Sync `.context/` to reflect the actual state of the project.
 
 ## Information
 
-**Session/milestone:** ${input:session:Brief description of what this session did (e.g. Sprint 3 - Auth module)}
-**Changes made:** ${input:changes:What changed in this session}
+**Session/milestone:** `<session>` _(Brief description of what this session did (e.g. Sprint 3 - Auth module))_
+**Changes made:** `<changes>` _(What changed in this session)_
 
 ---
 
@@ -26,7 +22,7 @@ Sync `.context/` to reflect the actual state of the project.
 
 Read the git log or list of changed files, append any missing entries:
 ```
-[{{date}}] ${input:changes}
+[YYYY-MM-DD] <changes>
 ```
 
 Format for each entry:
@@ -39,16 +35,16 @@ Types: `feat`, `fix`, `refactor`, `chore`, `test`, `docs`
 
 Review any decisions made this session:
 - Any new architectural choices not yet logged?
-- If yes → run the `log-decision` prompt for each one.
+- If yes → use the `/log-decision` skill for each one.
 
 ### 3. Check ERRORS.md
 
 Review bugs/issues encountered this session:
 - Append new errors in the format:
   ```
-  [{{date}}] ERROR: <description> | Root cause: <cause> | Fix: <solution> | File: <path>
+  [YYYY-MM-DD] ERROR: <description> | Root cause: <cause> | Fix: <solution> | File: <path>
   ```
-- Update status of old errors that were fixed: `Fixed: {{date}}`
+- Update status of old errors that were fixed: `Fixed: YYYY-MM-DD`
 
 ### 4. Update FILE-INDEX.md
 
@@ -71,3 +67,7 @@ Check:
 ---
 
 **Execute all steps — report a summary when done.**
+
+---
+
+Detailed conventions, formats and examples: [references/guide.md](references/guide.md) — read it before executing.

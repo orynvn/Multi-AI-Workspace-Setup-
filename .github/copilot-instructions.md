@@ -67,5 +67,5 @@ After completing any task:
 - Append to `.context/HISTORY.md`: `[YYYY-MM-DD] <type>: <desc> — <file>`
 - Update `.context/ACTIVE.md`: mark In Progress items complete, update Recent Context
 - Update `.context/FILE-INDEX.md` if files changed — use `file-indexer` skill
-- Architectural decision made → run `log-decision` prompt
+- Architectural decision made → use the `/log-decision` skill
 - Bug fixed → append to `.context/ERRORS.md`

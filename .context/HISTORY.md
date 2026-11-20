@@ -46,3 +46,4 @@
 [2026-11-21] chore: remove 5 one-off cp allow rules with glob wildcards (permission warnings) — .claude/settings.local.json
 [2026-11-21] chore: update Claude Code + Codex setup to current docs — fix hooks (stdin JSON, exit 2), .mcp.json, skills, agent name/model aliases, add .codex/ (config, hooks, rules, agents), CLAUDE.md @imports — .claude/, .codex/, .mcp.json, CLAUDE.md, AGENTS.md, README.md
 [2026-11-21] chore: update Copilot VS Code config — drop redundant/deprecated settings, fix stale serverSampling key, hide duplicate .claude/agents, remove non-schema mcp.json fields — .vscode/settings.json, .vscode/mcp.json, README.md
+[2026-11-21] refactor: convert Copilot prompts to Agent Skills — 10 prompts → .github/skills/<name>/SKILL.md, merge 4 overlapping guide skills into references/guide.md, add frontmatter to file-indexer — .github/skills/, .github/prompts/ (removed)

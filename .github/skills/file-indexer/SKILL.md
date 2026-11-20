@@ -1,3 +1,8 @@
+---
+name: file-indexer
+description: "Keep .context/FILE-INDEX.md accurate after every task that creates, moves, renames or deletes files, so agents can locate module files without scanning."
+---
+
 # SKILL: File Indexer
 
 ## Purpose
@@ -8,7 +13,7 @@ This skill guides how to keep `.context/FILE-INDEX.md` accurate after every impl
 
 - At the end of every `oryn-dev` LOG phase.
 - After a phase is completed.
-- When the `context-updater` skill runs.
+- When the `/update-context` skill runs.
 - When files are created, moved, renamed, or deleted.
 
 ---

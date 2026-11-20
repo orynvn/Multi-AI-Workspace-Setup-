@@ -1,23 +1,19 @@
 ---
-mode: agent
-tools:
-  - codebase
-  - runCommands
-  - readFile
-description: >
-  Run E2E tests with Playwright. Supports headed/headless mode, specific test files,
-  and automatically reports results in standard format.
+name: run-e2e-test
+description: "Run E2E tests with Playwright. Supports headed/headless mode, specific test files, and automatically reports results in standard format."
 ---
 
 # Run E2E Test Prompt
+
+> **Inputs** (`testFile`, `mode`, `browser`): take them from the user's message / skill arguments. Ask once for any required value that is missing; use `YYYY-MM-DD` = today.
 
 Run E2E tests with Playwright.
 
 ## Information
 
-**Test file/suite:** ${input:testFile:File or suite name (leave blank to run all)}
-**Mode:** ${input:mode:headless | headed | debug}
-**Browser:** ${input:browser:chromium | firefox | webkit | all}
+**Test file/suite:** `<testFile>` _(File or suite name (leave blank to run all))_
+**Mode:** `<mode>` _(headless | headed | debug)_
+**Browser:** `<browser>` _(chromium | firefox | webkit | all)_
 
 ---
 
@@ -38,7 +34,7 @@ Read `playwright.config.ts` to understand:
 npx playwright test
 
 # Specific file
-npx playwright test ${input:testFile}
+npx playwright test <testFile>
 
 # Headed mode (see browser)
 npx playwright test --headed
@@ -47,7 +43,7 @@ npx playwright test --headed
 npx playwright test --debug
 
 # Specific browser
-npx playwright test --project=${input:browser}
+npx playwright test --project=<browser>
 
 # With report
 npx playwright test --reporter=html
@@ -66,8 +62,8 @@ Parse Playwright output:
 ```markdown
 ## ✅ E2E Test Report
 
-**Timestamp:** {{date}} {{time}}
-**Mode:** ${input:mode} | **Browser:** ${input:browser}
+**Timestamp:** YYYY-MM-DD HH:MM
+**Mode:** <mode> | **Browser:** <browser>
 **Tests:** X pass | 0 fail | 0 flaky
 **Duration:** Xs
 
@@ -84,7 +80,7 @@ Parse Playwright output:
 ```markdown
 ## ❌ E2E Test Report
 
-**Timestamp:** {{date}} {{time}}
+**Timestamp:** YYYY-MM-DD HH:MM
 **Tests:** X pass | Y fail | Z flaky
 
 ### Failing Tests
@@ -117,3 +113,7 @@ If still flaky → report and quarantine the test (tag `@flaky`).
 ---
 
 **Start: Check config → run → report → show-report if there are failures.**
+
+---
+
+Detailed conventions, formats and examples: [references/guide.md](references/guide.md) — read it before executing.

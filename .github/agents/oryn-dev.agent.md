@@ -49,7 +49,7 @@ handoffs:
     send: false
   - label: "📦 Create Commit"
     agent: oryn-dev
-    prompt: "Create a standardized git commit for the changes just implemented. Run /commit-task prompt."
+    prompt: "Create a standardized git commit for the changes just implemented. Use the /commit-task skill."
     send: false
 ---
 

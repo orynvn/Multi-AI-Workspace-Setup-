@@ -1,24 +1,19 @@
 ---
-mode: agent
-tools:
-  - codebase
-  - editFiles
-  - readFile
-  - runCommands
-description: >
-  Write comprehensive test cases for a module or feature. Output: actual test file
-  + spec document in .context/test-cases/.
+name: write-test-cases
+description: "Write comprehensive test cases for a module or feature. Output: actual test file + spec document in .context/test-cases/."
 ---
 
 # Write Test Cases Prompt
+
+> **Inputs** (`module`, `target`, `testType`): take them from the user's message / skill arguments. Ask once for any required value that is missing; use `YYYY-MM-DD` = today.
 
 Write comprehensive test cases for the specified module/feature.
 
 ## Information
 
-**Module:** ${input:module:Module name (e.g. AUTH, USER, PRODUCT)}
-**Feature/File to test:** ${input:target:File or feature to write tests for (e.g. UserController, useAuth hook)}
-**Test type:** ${input:testType:unit | integration | e2e | all}
+**Module:** `<module>` _(Module name (e.g. AUTH, USER, PRODUCT))_
+**Feature/File to test:** `<target>` _(File or feature to write tests for (e.g. UserController, useAuth hook))_
+**Test type:** `<testType>` _(unit | integration | e2e | all)_
 
 ---
 
@@ -45,7 +40,7 @@ For each function/endpoint, identify:
 
 ### 3. Assign Test IDs
 
-Format: `TC-${input:module}-NNN`
+Format: `TC-<module>-NNN`
 
 Check `.context/test-cases/` to find the next sequential number.
 
@@ -53,7 +48,7 @@ Check `.context/test-cases/` to find the next sequential number.
 
 **Laravel (Pest PHP):**
 ```php
-it('TC-${input:module}-001: returns 200 with valid payload', function () {
+it('TC-<module>-001: returns 200 with valid payload', function () {
     // Arrange
     $user = User::factory()->create();
 
@@ -69,8 +64,8 @@ it('TC-${input:module}-001: returns 200 with valid payload', function () {
 
 **React/Next.js/Vue (Vitest + Testing Library):**
 ```ts
-describe('TC-${input:module}', () => {
-  it('TC-${input:module}-001: renders correctly with valid props', () => {
+describe('TC-<module>', () => {
+  it('TC-<module>-001: renders correctly with valid props', () => {
     // Arrange
     const props = { ... }
 
@@ -94,11 +89,11 @@ test('TC-E2E-001: user can complete flow', async ({ page }) => {
 
 ### 5. Save spec document
 
-Create file `.context/test-cases/TC-${input:module}-spec.md`:
+Create file `.context/test-cases/TC-<module>-spec.md`:
 ```markdown
-# Test Cases: ${input:module}
+# Test Cases: <module>
 
-## TC-${input:module}-001: <description>
+## TC-<module>-001: <description>
 **Type:** unit | integration | e2e
 **Priority:** P0 | P1 | P2
 **Arrange:** <setup>
@@ -109,8 +104,12 @@ Create file `.context/test-cases/TC-${input:module}-spec.md`:
 
 ### 6. Run tests
 
-After writing, run the `run-api-test` or `run-e2e-test` prompt.
+After writing, use the `/run-api-test` or `/run-e2e-test` skill.
 
 ---
 
 **Start: Read target file → list test cases → write → save spec.**
+
+---
+
+Detailed conventions, formats and examples: [references/guide.md](references/guide.md) — read it before executing.

@@ -1,24 +1,19 @@
 ---
-mode: agent
-tools:
-  - codebase
-  - editFiles
-  - readFile
-  - runCommands
-description: >
-  Create a migration file for Laravel. Auto-detects table name, columns, indexes,
-  foreign keys and generates the migration + model fillable if needed.
+name: create-migration
+description: "Create a migration file for Laravel. Auto-detects table name, columns, indexes, foreign keys and generates the migration + model fillable if needed."
 ---
 
 # Create Migration Prompt (Laravel)
+
+> **Inputs** (`type`, `table`, `description`): take them from the user's message / skill arguments. Ask once for any required value that is missing; use `YYYY-MM-DD` = today.
 
 Create a new Laravel migration following the correct conventions.
 
 ## Migration information
 
-**Type:** ${input:type:create | add_column | remove_column | add_index | add_foreign_key}
-**Table name:** ${input:table:Table name (snake_case, plural) — e.g. user_profiles}
-**Description:** ${input:description:Short description — e.g. Add avatar_url column to users}
+**Type:** `<type>` _(create | add_column | remove_column | add_index | add_foreign_key)_
+**Table name:** `<table>` _(Table name (snake_case, plural) — e.g. user_profiles)_
+**Description:** `<description>` _(Short description — e.g. Add avatar_url column to users)_
 
 ---
 
@@ -54,7 +49,7 @@ Template for CREATE TABLE:
 ```php
 public function up(): void
 {
-    Schema::create('${input:table}', function (Blueprint $table) {
+    Schema::create('<table>', function (Blueprint $table) {
         $table->id();
         // columns here
         $table->timestamps();
@@ -63,7 +58,7 @@ public function up(): void
 
 public function down(): void
 {
-    Schema::dropIfExists('${input:table}');
+    Schema::dropIfExists('<table>');
 }
 ```
 
@@ -79,7 +74,7 @@ Add a `$fillable` array to the Model.
 
 Append to `.context/HISTORY.md`:
 ```
-[{{date}}] migration: ${input:description} — database/migrations/<filename>
+[YYYY-MM-DD] migration: <description> — database/migrations/<filename>
 ```
 
 ---

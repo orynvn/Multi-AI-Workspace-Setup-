@@ -1,6 +1,6 @@
 {
   // ─── Copilot customization ──────────────────────────────────────────────────
-  // Defaults already discover: .github/agents, .github/instructions, .github/prompts,
+  // Defaults already discover: .github/agents, .github/instructions,
   // .github/hooks, .github/skills, .claude/skills, .agents/skills — no need to list them.
 
   // Copilot also discovers .claude/agents by default. Claude Code agents share names

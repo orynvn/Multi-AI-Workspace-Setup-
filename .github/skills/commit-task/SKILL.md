@@ -1,23 +1,19 @@
 ---
-mode: agent
-tools:
-  - codebase
-  - runCommands
-description: >
-  Create a Conventional Commits-compliant git commit for the task just completed.
-  Auto-detects staged changes, generates an appropriate message, and commits.
-  Does NOT push automatically — the user decides when to push to remote.
+name: commit-task
+description: "Create a Conventional Commits-compliant git commit for the task just completed. Auto-detects staged changes, generates an appropriate message, and commits. Does NOT push automatically — the user decides when to push to remote."
 ---
 
 # Commit Task
+
+> **Inputs** (`taskName`, `type`, `scope`): take them from the user's message / skill arguments. Ask once for any required value that is missing; use `YYYY-MM-DD` = today.
 
 Create a standardized git commit for the changes just implemented.
 
 ## Commit information
 
-**Task/Feature:** ${input:taskName:Name of the task or feature just completed (e.g. JWT refresh token, Fix null check in UserService)}
-**Type:** ${input:type:feat|fix|test|refactor|chore|docs|perf|ci}
-**Scope:** ${input:scope:Module/feature scope (e.g. auth, user, payment, api) — leave blank if global}
+**Task/Feature:** `<taskName>` _(Name of the task or feature just completed (e.g. JWT refresh token, Fix null check in UserService))_
+**Type:** `<type>` _(feat|fix|test|refactor|chore|docs|perf|ci)_
+**Scope:** `<scope>` _(Module/feature scope (e.g. auth, user, payment, api) — leave blank if global)_
 
 ---
 

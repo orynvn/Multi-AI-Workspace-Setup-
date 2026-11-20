@@ -18,7 +18,7 @@
 
 ## How to add an ADR
 
-1. Run the `log-decision` prompt in Copilot.
+1. Use the `/log-decision` skill in Copilot.
 2. Or manually: create `.context/decisions/ADR-NNN-<slug>.md` + update the table above.
 
 ## ADR Template

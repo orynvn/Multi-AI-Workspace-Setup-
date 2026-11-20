@@ -116,9 +116,8 @@ project-root/
 │   ├── copilot-instructions.md        # Thin adapter cho Copilot
 │   ├── agents/                        # 11 Copilot agents
 │   ├── instructions/                  # Stack-specific (laravel, nextjs, ...)
-│   ├── prompts/                       # Slash command templates
 │   ├── hooks/scripts/                 # VS Code hooks
-│   └── skills/                        # Reusable Copilot skills
+│   └── skills/                        # Copilot skills: /commit-task, /new-feature, /run-api-test... (thay prompts/)
 │
 ├── .claude/
 │   ├── settings.json                  # Hooks + permissions (deny .env)

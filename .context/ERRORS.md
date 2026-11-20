@@ -56,7 +56,7 @@
 
 - When a new bug is found → add to the **Open** section.
 - When a bug is fixed → move to the **Resolved** section + add `**Fixed:** YYYY-MM-DD`.
-- Copilot automatically appends when running the `update-context` prompt.
+- Copilot automatically appends when running the `/update-context` skill.
 
 ## Common anti-patterns to avoid
 
